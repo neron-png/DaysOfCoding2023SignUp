@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.event-logo {
+    width: 40%;
+}
+.buttons {
+    text-align: center;
+}
+/* .nav-link.active {
+    border-bottom: 3px solid #0d6efd;
+} */
+.navbar-brand img {
+    height: 2rem;
+}
+.nav-tabs {
+    border-bottom: 0.1rem solid rgb(40, 40, 43);
+}
+.nav-link.active{
+    border: 0;
+}
