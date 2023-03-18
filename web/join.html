@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="joinStyles.css">
+</head>
+<body class="bg-dark text-light ">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pb-0">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://auth.acm.org/" target="_blank">
+                <img src="content/acmlogo.webp" alt="ACM Logo">
+            </a>
+
+        </div>
+    </nav>
+    <div class="container">
+        <h1 id="title">Join your Team</h1>
+        <div class="mt-3" style="width:60%">
+            <form id="make_form">
+                <div class="form-group row">
+                  <label for="invitecode" class="col-4 col-form-label fw-bold">Invite Code</label>
+                  <div class="col-8">
+                    <input id="invitecode" name="invitecode" placeholder="eg. ABCD" type="text" required="required" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row my-4">
+                  <label for="discord" class="col-4 col-form-label fw-bold">Your Discord Username</label>
+                  <div class="col-8">
+                    <input id="discord" name="discord" placeholder="eg. AlanTuring#3610" type="text" class="form-control" required="required">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="offset-4 col-8">
+                    <button name="submit" id="submit" type="submit" class="btn btn-primary">Join!</button>
+                  </div>
+                </div>
+              </form>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content bg-dark container p-5" style="width: 50%;height: fit-content;margin-top:20%;">
+          <p id="info">Some text in the Modal..</p>
+          <h3 id="name" style="color:#46DACE; font-family:Arial;"></h3>
+          <h2>Make sure to also join the event discord server!</h2>
+          <a href="https://discord.com/invite/uzs9JHqFAP" class="btn btn-primary action_button" target="_blank">Join</a>
+        </div>
+
+    </div>
+
+    <script src="joinScripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>

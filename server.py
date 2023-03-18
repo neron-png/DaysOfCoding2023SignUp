@@ -42,9 +42,18 @@ def activeDays():
 
 @app.route("/createTeam", methods=["POST"])
 def createTeam():
-
-    resp =  Response(json.dumps({"code":"abcde"}), status=200, mimetype='application/json', headers={'Access-Control-Allow-Origin':'*',
-                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'})
+    resp = Response(json.dumps({"code": "abcde"}), status=200, mimetype='application/json',
+                    headers={'Access-Control-Allow-Origin': '*',
+                             'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
     return resp
+
+@app.route("/joinTeam", methods=["POST"])
+def joinTeam():
+    resp = Response(json.dumps({"team": "MyChemicalBromance"}), status=200, mimetype='application/json',
+                    headers={'Access-Control-Allow-Origin': '*',
+                             'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+    return resp
+
+
 
 app.run(host=ip, port=5000, debug=True)
