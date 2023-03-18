@@ -11,43 +11,47 @@
             <a class="navbar-brand" href="https://auth.acm.org/" target="_blank">
                 <img src="content/acmlogo.webp" alt="ACM Logo">
             </a>
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active bg-primary text-light" aria-current="page" href="#">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 3</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 4</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 5</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 6</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-secondary" href="#">Day 7</a>
-                </li>
-            </ul>
+            
         </div>
     </nav>
     <div class="container">
-        <img class="event-logo mb-3" src="content/eventlogo.png" alt="Event Logo">
-        <div class="buttons mt-3">
-            <a href="/create.html"><button class="btn btn-primary btn-lg mt-1">Create a team</button></a>
-            <a href="/Button2.html"><button class="btn btn-primary btn-lg mt-1">Join a team</button></a>
-            <a href="/Button3.html"><button class="btn btn-primary btn-lg mt-1">Participate Solo</button></a>
-            <a href="/Button4.html"><button class="btn btn-primary btn-lg mt-1">Find a team for me</button></a>
+        <h1 id="title">Create a Team</h1>
+        <div class="mt-3" style="width:60%">
+            <form id="make_form">
+                <div class="form-group row">
+                  <label for="teamname" class="col-4 col-form-label fw-bold">Team name</label> 
+                  <div class="col-8">
+                    <input id="teamname" name="teamname" placeholder="eg. MyChemicalBromance" type="text" required="required" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row my-4">
+                  <label for="discord" class="col-4 col-form-label fw-bold">Your Discord Username</label> 
+                  <div class="col-8">
+                    <input id="discord" name="discord" placeholder="eg. AlanTuring#3610" type="text" class="form-control" required="required">
+                  </div>
+                </div> 
+                <div class="form-group row">
+                  <div class="offset-4 col-8">
+                    <button name="submit" id="submit" type="submit" class="btn btn-primary">Create invite code and join</button>
+                  </div>
+                </div>
+              </form>
         </div>
     </div>
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content bg-dark container p-5" style="width: 50%;height: fit-content;margin-top:20%;">
+          <p id="info">Some text in the Modal..</p>
+          <h1 id="code" style="color:#46DACE; font-family:Arial;"></h1>
+          <h2>Make sure to also join the event discord server!</h2>
+          <a href="https://discord.com/invite/uzs9JHqFAP" class="btn btn-primary action_button" target="_blank">Join</a>
+        </div>
+      
+    </div>
+    
+    <script src="createScripts.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

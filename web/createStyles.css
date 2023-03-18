@@ -3,11 +3,17 @@
     --primary_0: var(--primary);
 }
 
+
+h1 {
+    color: var(--primary);
+    font-weight: bolder;
+    font-size: 5rem;
+}
+
 .btn-primary {
     background-color: var(--primary);
     color:#2f3235;
     border: 0;
-    border-radius: 0;
 }
 
 .bg-primary {
@@ -45,4 +51,8 @@ body {
 }
 .nav-link.active{
     border: 0;
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.6);
 }

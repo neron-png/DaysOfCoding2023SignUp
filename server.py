@@ -1,7 +1,10 @@
-from flask import Flask, request, Response, jsonify
-from flask_pymongo import PyMongo
+from wsgiref.headers import Headers
+from flask import Flask, request, Response, jsonify, json
 from flask_cors import CORS
 import sqlite3
+
+
+ACTIVE_DAYS = [1, 2, 3, 4, 5]
 
 app = Flask(__name__)
 CORS(app)
@@ -10,18 +13,38 @@ DATABASE = 'reviews.db'
 connection = sqlite3.connect(DATABASE, check_same_thread=False)
 cursor = connection.cursor()
 
-@app.route("/", methods=["GET"])
-def search():
+# @app.route("/", methods=["GET"])
+# def search():
 
-    reviews = cursor.execute("""
-    SELECT review
-    FROM reviews
-    """)
+#     reviews = cursor.execute("""
+#     SELECT review
+#     FROM reviews
+#     """)
     
-    review_comments = []
-    for review in reviews:
-        review_comments.append(review[0])
+#     review_comments = []
+#     for review in reviews:
+#         review_comments.append(review[0])
 
-    return Response(status=200)
+#     return Response(status=200)
 
-app.run(host=ip, port=5000, debug=False)
+
+@app.route("/activeDays", methods=["GET"])
+def activeDays():
+
+    activeDays = {
+        "activeDays" : [x for x in ACTIVE_DAYS]
+    }
+
+    resp =  Response(response=json.dumps(activeDays), status=200, mimetype='application/json', headers={'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'})
+    # resp.headers["Access-Control-Allow-Origin", "*"]
+    return resp
+
+@app.route("/createTeam", methods=["POST"])
+def createTeam():
+
+    resp =  Response(json.dumps({"code":"abcde"}), status=200, mimetype='application/json', headers={'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'})
+    return resp
+
+app.run(host=ip, port=5000, debug=True)
