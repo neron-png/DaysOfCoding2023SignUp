@@ -1,5 +1,5 @@
 :root {
-    --primary: #5FE1D9;
+    --primary: #9933ff;
     --primary_0: var(--primary);
 }
 
@@ -10,9 +10,20 @@ h1 {
     font-size: 5rem;
 }
 
+.bottomright {
+    position: fixed;
+    right: 0px; bottom: 0px;
+  }
+
+  .topleft {
+    position: fixed;
+    left: 0px; top: 0px;
+  }
+
+
 .btn-primary {
     background-color: var(--primary);
-    color:#2f3235;
+    color:#d9dde0;
     border: 0;
 }
 
