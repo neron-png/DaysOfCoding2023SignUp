@@ -1,0 +1,70 @@
+:root {
+    --primary: #9933ff;
+    --primary_0: var(--primary);
+}
+
+
+h1 {
+    color: var(--primary);
+    font-weight: bolder;
+    font-size: 5rem;
+}
+
+.bottomright {
+    position: fixed;
+    right: 0px; bottom: 0px;
+  }
+
+  .topleft {
+    position: fixed;
+    left: 0px; top: 0px;
+  }
+
+
+.btn-primary {
+    background-color: var(--primary);
+    color:#d9dde0;
+    border: 0;
+    width:40%
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("content/background.png");
+}
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.event-logo {
+    width: 30%;
+}
+.buttons {
+    text-align: center;
+}
+.navbar-brand img {
+    height: 3.5rem;
+}
+.nav-tabs {
+    border-bottom: 0.1rem solid rgb(40, 40, 43);
+}
+.nav-link.active{
+    border: 0;
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.6);
+}

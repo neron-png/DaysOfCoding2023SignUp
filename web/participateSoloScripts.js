@@ -8,9 +8,9 @@ async function uploadData(e){
 
     var username = formdata.get('discord');
 
-    console.log(invitecode);
+    console.log(username);
 
-    await fetch(url + "/joinTeam", {
+    await fetch(url + "/createTeam", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"discord_username": username})
@@ -19,9 +19,8 @@ async function uploadData(e){
         let data = response.json().then(data => {
             console.log(data);
         document.getElementById('submit').setAttribute("disabled", "true");
-        document.getElementById('title').innerHTML = data["team"];
-        document.getElementById('name').innerHTML = data["team"];
-        document.getElementById('info').innerHTML = "Successfully joined the team with code";
+        document.getElementById('title').innerHTML = data["code"];
+        document.getElementById('info').innerHTML = "Joined successfully. Good Luck!";
 
         // alert('You have successfully created and joined your team!\nCopy this code and share it with your teammates to have them join');
 		modal.style.display = "block";
