@@ -61,5 +61,11 @@ def participateSolo():
                              'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
     return resp
 
+@app.route("/findTeam", methods=["POST"])
+def findTeam():
+    resp = Response(json.dumps({"solo": "MyChemicalBromance"}), status=200, mimetype='application/json',
+                    headers={'Access-Control-Allow-Origin': '*',
+                             'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+    return resp
 
 app.run(host=ip, port=5000, debug=True)
