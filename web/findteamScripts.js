@@ -19,19 +19,25 @@ async function uploadData(e){
         let data = response.json().then(data => {
             console.log(data);
         document.getElementById('submit').setAttribute("disabled", "true");
-        //document.getElementById('title').innerHTML = data["code"];
-        //document.getElementById('code').innerHTML = data["code"];
         document.getElementById('info').innerHTML = "Your request for finding a team has been successfully submitted. Thank you and good luck!";
 
         // alert('You have successfully created and joined your team!\nCopy this code and share it with your teammates to have them join');
-		modal.style.display = "block";
+		    modal.style.display = "block";
         });
 
-      } else{
-          alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP");
+      } else if ( response.status === 418 ){
+       
+        let data = response.json().then(data => {
+          console.log(data);
+          alert(data["error"]);
+        });
+        
+        }
+       else {
+        alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP");
       }
   }).catch(error => {
-    alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP\nΉ στα social @acmauth");
+    alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP \nΉ στα social @acmauth");
   });
 
 }

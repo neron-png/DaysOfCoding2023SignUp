@@ -230,7 +230,34 @@ def participateSolo():
 #################
 @app.route("/findTeam", methods=["POST"])
 def findTeam():
-    resp = Response(json.dumps({"solo": "MyChemicalBromance"}), status=200, mimetype='application/json',
+    
+    # Getting JSON data as a python DICT
+    data = request.get_json()
+    discord_username = data["discord_username"]
+
+    # Checking data validity
+    errorFlag = False
+    errorText = ""
+    if not checkDiscord(discord_username):
+        errorText = "Εσφαλμένο discord username. Παράδειγμα αποδεκτού username: Jon Doe#7520"
+        errorFlag = True
+    if errorFlag:
+        return Response(json.dumps({"error": errorText}), status=418, mimetype='application/json',
+                        headers={   'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+    
+    # Adding the user to the DB as a solo participation
+    code = generateCode()
+    cursor.execute("""
+        INSERT INTO teams (code, players, teamName, P1)
+        VALUES(?, ?, ?, ?)
+        """, (code, 555, discord_username, discord_username))
+    connection.commit()
+
+    # Backup message to discord
+    sendWebhook(f"{discord_username} **joined and is looking for a team!** **with code** {code}")
+
+    resp = Response(json.dumps({"": ""}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',
                              'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
     return resp
