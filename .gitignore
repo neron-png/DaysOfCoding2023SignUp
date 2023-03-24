@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+teams.db
+.vscode
+
 # C extensions
 *.so
 
