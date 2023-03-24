@@ -101,7 +101,7 @@ def createTeam():
         FROM teams
         where teamName = ?
         )
-    """, (team_name, ))
+    """, (team_name, )) # Note the trailing comma, it's intentional to convert to tuple
     
     # If they don't exist, create a new entry into the database
     if exists_check.fetchone() == (0,):
@@ -134,7 +134,54 @@ def createTeam():
 ##################
 @app.route("/joinTeam", methods=["POST"])
 def joinTeam():
-    resp = Response(json.dumps({"team": "MyChemicalBromance"}), status=200, mimetype='application/json',
+
+    # Getting JSON data as a python DICT
+    data = request.get_json()   
+    code = data["invitecode"].upper()
+    discord_username = data["discord_username"]
+
+    # Checking data validity
+    errorFlag = False
+    errorText = ""
+    # Check if a team with that code exists
+    exists_check = cursor.execute("""
+    SELECT EXISTS(
+        SELECT 1
+        FROM teams
+        where code = ?
+        )
+    """, (code, )) # Note the trailing comma, it's intentional to convert to tuple
+
+    if exists_check.fetchone == (0,):
+        errorFlag = True
+        errorText = "Δεν υπάρχει ομάδα με αυτόν τον κωδικό. Εάν πιστεύετε ότι αυτό είναι λάθος, στείλτε μας ένα μήνυμα στο discord server της εκδήλωσης https://discord.com/invite/uzs9JHqFAP"
+    if not checkDiscord(discord_username):
+        errorText = "Invalid discord username. Example of a valid username: Jon Doe#7520"
+        errorFlag = True
+    
+    # check if team is full
+    teamRow = cursor.execute("""select * from teams where code = ?""", (code,)).fetchone()
+    teamMembers = teamRow[3]
+    if teamMembers == 4:
+        errorFlag = True
+        errorText = "Αυτή η ομάδα είναι ήδη πλήρης! Εάν πιστεύετε ότι αυτό είναι λάθος, στείλτε μας ένα μήνυμα στο discord server της εκδήλωσης https://discord.com/invite/uzs9JHqFAP"
+    
+    if errorFlag:
+        return Response(json.dumps({"error": errorText}), status=418, mimetype='application/json',
+                        headers={   'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+
+    # No problems with the data, let's add the user!
+    PID = f"P{teamMembers+1}"
+    cursor.execute(f"""UPDATE teams SET {PID} = ? WHERE code = ?""", (discord_username, code,))
+    cursor.execute(f"""UPDATE teams SET players = ? WHERE code = ?""", (teamMembers+1, code,))
+    connection.commit()
+
+    # Backup message to discord
+    sendWebhook(f"{discord_username} **joined** {teamRow[2]} **with code** {code} [{teamRow[3]+1}/4]")
+
+
+    resp = Response(json.dumps({"team": teamRow[2]}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',
                              'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
     return resp
