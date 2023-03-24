@@ -77,13 +77,13 @@ def createTeam():
     errorFlag = False
     errorText = ""
     if not team_name.isalnum():
-        errorText = "Team name must be Alphanumeric, without spaces"
+        errorText = "Το όνομα της ομάδας πρέπει να είναι αλφανουμερικό χωρίς κενά!"
         errorFlag = True
     if len(team_name) > 32:
-        errorText = "Team name may not exceed 32 characters"
+        errorText = "Το όνομα της ομάδας δεν μπορεί να ξεπερνάει τους 32 χαρακτήρες!"
         errorFlag = True
     if not checkDiscord(discord_username):
-        errorText = "Invalid discord username. Example of a valid username: Jon Doe#7520"
+        errorText = "Εσφαλμένο discord username. Παράδειγμα αποδεκτού username: Jon Doe#7520"
         errorFlag = True
     
     if errorFlag:
@@ -156,7 +156,7 @@ def joinTeam():
         errorFlag = True
         errorText = "Δεν υπάρχει ομάδα με αυτόν τον κωδικό. Εάν πιστεύετε ότι αυτό είναι λάθος, στείλτε μας ένα μήνυμα στο discord server της εκδήλωσης https://discord.com/invite/uzs9JHqFAP"
     if not checkDiscord(discord_username):
-        errorText = "Invalid discord username. Example of a valid username: Jon Doe#7520"
+        errorText = "Εσφαλμένο discord username. Παράδειγμα αποδεκτού username: Jon Doe#7520"
         errorFlag = True
     
     # check if team is full
@@ -192,7 +192,34 @@ def joinTeam():
 #################
 @app.route("/participateSolo", methods=["POST"])
 def participateSolo():
-    resp = Response(json.dumps({"solo": "MyChemicalBromance"}), status=200, mimetype='application/json',
+
+    # Getting JSON data as a python DICT
+    data = request.get_json()
+    discord_username = data["discord_username"]
+
+    # Checking data validity
+    errorFlag = False
+    errorText = ""
+    if not checkDiscord(discord_username):
+        errorText = "Εσφαλμένο discord username. Παράδειγμα αποδεκτού username: Jon Doe#7520"
+        errorFlag = True
+    if errorFlag:
+        return Response(json.dumps({"error": errorText}), status=418, mimetype='application/json',
+                        headers={   'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+    
+    # Adding the user to the DB as a solo participation
+    code = generateCode()
+    cursor.execute("""
+        INSERT INTO teams (code, players, teamName, P1)
+        VALUES(?, ?, ?, ?)
+        """, (code, 666, discord_username, discord_username))
+    connection.commit()
+
+    # Backup message to discord
+    sendWebhook(f"{discord_username} **joined Solo** **with code** {code}")
+
+    resp = Response(json.dumps({"": ""}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',
                              'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
     return resp

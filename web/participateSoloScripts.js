@@ -4,13 +4,13 @@ async function uploadData(e){
     var form = document.getElementById('make_form');
     var formdata = new FormData(e.target);
 
-	var modal = document.getElementById("myModal");
+	  var modal = document.getElementById("myModal");
 
     var username = formdata.get('discord');
 
     console.log(username);
 
-    await fetch(url + "/createTeam", {
+    await fetch(url + "/participateSolo", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"discord_username": username})
@@ -19,18 +19,25 @@ async function uploadData(e){
         let data = response.json().then(data => {
             console.log(data);
         document.getElementById('submit').setAttribute("disabled", "true");
-        document.getElementById('title').innerHTML = data["code"];
         document.getElementById('info').innerHTML = "Joined successfully. Good Luck!";
 
         // alert('You have successfully created and joined your team!\nCopy this code and share it with your teammates to have them join');
-		modal.style.display = "block";
+		    modal.style.display = "block";
         });
 
-      } else{
-          alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP");
+      } else if ( response.status === 418 ){
+       
+        let data = response.json().then(data => {
+          console.log(data);
+          alert(data["error"]);
+        });
+        
+        }
+       else {
+        alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP");
       }
   }).catch(error => {
-    alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP\nΉ στα social @acmauth");
+    alert("Κάτι πήγε στραβά!\nΠαρακαλούμε στείλτε μας μήνυμα στο discord της εκδήλωσης https://discord.com/invite/uzs9JHqFAP \nΉ στα social @acmauth");
   });
 
 }
