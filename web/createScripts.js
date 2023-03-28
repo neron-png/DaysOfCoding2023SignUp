@@ -11,15 +11,18 @@ async function uploadData(e){
 
     var teamname = formdata.get('teamname');
     var username = formdata.get('discord');
+    var fullname = formdata.get('fullname')
 
     console.log(teamname);
     console.log(username);
+    console.log(fullname)
 
     await fetch(url + "/createTeam", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"team_name": teamname,
-                            "discord_username": username})
+                            "discord_username": username,
+                            "full_name": fullname})
     }).then(response => {
       if(response.status == 200){
         let data = response.json().then(data => {

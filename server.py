@@ -72,6 +72,7 @@ def createTeam():
     data = request.get_json()   
     team_name = data["team_name"].lower()
     discord_username = data["discord_username"]
+    full_name = data["full_name"]
 
     # Check data validity
     errorFlag = False
@@ -119,7 +120,7 @@ def createTeam():
                              'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
 
         # Fallback message to the discord server
-        sendWebhook(f"{discord_username} **created** {team_name} **with code** {code}")
+        sendWebhook(f"{full_name} with discord username {discord_username} **created** {team_name} **with code** {code}")
 
     else:
         resp = Response(json.dumps({"error": "Υπάρχει ήδη ομάδα με αυτό το όνομα!"}), status=418, mimetype='application/json',
@@ -139,6 +140,7 @@ def joinTeam():
     data = request.get_json()   
     code = data["invitecode"].upper()
     discord_username = data["discord_username"]
+    full_name = data["full_name"]
 
     # Checking data validity
     errorFlag = False
@@ -178,7 +180,7 @@ def joinTeam():
     connection.commit()
 
     # Backup message to discord
-    sendWebhook(f"{discord_username} **joined** {teamRow[2]} **with code** {code} [{teamRow[3]+1}/4]")
+    sendWebhook(f"{full_name} with discord username {discord_username} **joined** {teamRow[2]} **with code** {code} [{teamRow[3]+1}/4]")
 
 
     resp = Response(json.dumps({"team": teamRow[2]}), status=200, mimetype='application/json',
@@ -196,6 +198,7 @@ def participateSolo():
     # Getting JSON data as a python DICT
     data = request.get_json()
     discord_username = data["discord_username"]
+    full_name = data["full_name"]
 
     # Checking data validity
     errorFlag = False
@@ -217,7 +220,7 @@ def participateSolo():
     connection.commit()
 
     # Backup message to discord
-    sendWebhook(f"{discord_username} **joined Solo** **with code** {code}")
+    sendWebhook(f"{full_name} with discord username {discord_username} **joined Solo** **with code** {code}")
 
     resp = Response(json.dumps({"": ""}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',
@@ -234,6 +237,7 @@ def findTeam():
     # Getting JSON data as a python DICT
     data = request.get_json()
     discord_username = data["discord_username"]
+    full_name = data["full_name"]
 
     # Checking data validity
     errorFlag = False
@@ -255,7 +259,7 @@ def findTeam():
     connection.commit()
 
     # Backup message to discord
-    sendWebhook(f"{discord_username} **joined and is looking for a team!** **with code** {code}")
+    sendWebhook(f"{full_name} with discord username {discord_username} **joined and is looking for a team!** **with code** {code}")
 
     resp = Response(json.dumps({"": ""}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',

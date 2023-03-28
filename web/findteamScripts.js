@@ -7,13 +7,14 @@ async function uploadData(e){
 	var modal = document.getElementById("myModal");
 
     var username = formdata.get('discord');
-
+    var fullname = formdata.get('fullname')
     console.log(username);
+    console.log(fullname)
 
     await fetch(url + "/findTeam", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"discord_username": username})
+        body: JSON.stringify({"discord_username": username, "full_name":fullname})
     }).then(response => {
       if(response.status == 200){
         let data = response.json().then(data => {
