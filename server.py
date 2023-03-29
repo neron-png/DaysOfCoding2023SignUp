@@ -50,13 +50,15 @@ def sendWebhook(webhook_text):
     message = {"content": webhook_text}
     response = requests.post(webhook_url, data=json.dumps(message), headers={'Content-Type': 'application/json'})
 
-@app.route("/problem_checking", methods=["GET"])
+
+@app.route("/problem_checking", methods=["POST"])
 def problem_checking():
     print("I am here")
     data = request.get_json()
     test_case = data["test_case"]
     if activeDay == 1:
         print(problems.day1.greeting_problem(test_case))
+    
 
 
 @app.route("/activeDay", methods=["GET"])

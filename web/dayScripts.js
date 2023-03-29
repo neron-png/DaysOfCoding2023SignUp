@@ -1,4 +1,4 @@
-let url = "http://localhost:5000"
+let url = "http://127.0.0.1:5000"
 
 
 async function uploadData(e){
@@ -7,11 +7,10 @@ async function uploadData(e){
 
 	var modal = document.getElementById("myModal");
 
-    var test_case = formdata.get('test_case')
-
+    var test_case = formdata.get('test_case');
 
     await fetch(url + "/problem_checking", {
-        method: "GET",
+        method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"test_case": test_case})
     }).then(response => {
