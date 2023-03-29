@@ -56,9 +56,12 @@ def problem_checking():
     print("I am here")
     data = request.get_json()
     test_case = data["test_case"]
+    result = ""
+
     if ACTIVE_DAY == 1:
-        print(problems.day1.greeting_problem(test_case))
-    resp = Response(response=json.dumps({"":""}), status=200, mimetype='application/json',
+        result = problems.day1.greeting_problem(test_case)
+
+    resp = Response(response=json.dumps({"result": result}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',
                              'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
     # resp.headers["Access-Control-Allow-Origin", "*"]
