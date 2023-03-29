@@ -79,6 +79,15 @@ def problem_checking():
 @app.route("/activeDay", methods=["GET"])
 def activeDay():
 
+    global ACTIVE_DAY
+    
+    try:
+        with open("activeDay", 'r+') as f:
+            ACTIVE_DAY = int(f.readline())
+    except Exception as e:
+        print(e)
+        pass
+
     activeDay = {
         "activeDay" : ACTIVE_DAY
     }
