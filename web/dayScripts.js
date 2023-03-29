@@ -9,7 +9,7 @@ async function uploadData(e){
     var test_case = formdata.get('test_case')
 
     await fetch(url + "/problem_checking", {
-        method: "POST",
+        method: "GET",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"test_case": test_case})
     }).then(response => {
