@@ -58,7 +58,11 @@ def problem_checking():
     test_case = data["test_case"]
     if activeDay == 1:
         print(problems.day1.greeting_problem(test_case))
-    
+    resp = Response(response=json.dumps({"":""}), status=200, mimetype='application/json',
+                    headers={'Access-Control-Allow-Origin': '*',
+                             'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+    # resp.headers["Access-Control-Allow-Origin", "*"]
+    return resp
 
 
 @app.route("/activeDay", methods=["GET"])
