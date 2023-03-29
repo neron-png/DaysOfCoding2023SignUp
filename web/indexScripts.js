@@ -9,7 +9,7 @@ fetch(url + "/activeDay")
     console.log(activeDay)
 
     let dayTab = document.getElementById(`day_link`);
-    if (activeDay > 1){
+    if (activeDay >= 1){
       dayTab.classList.remove('disabled')
       dayTab.classList.remove('secondary')
       dayTab.classList.add('text-light')

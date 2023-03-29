@@ -1,5 +1,6 @@
 let url = "http://localhost:5000"
 
+
 async function uploadData(e){
     var form = document.getElementById('make_form');
     var formdata = new FormData(e.target);
@@ -7,6 +8,7 @@ async function uploadData(e){
 	var modal = document.getElementById("myModal");
 
     var test_case = formdata.get('test_case')
+
 
     await fetch(url + "/problem_checking", {
         method: "GET",
@@ -42,7 +44,7 @@ async function uploadData(e){
 }
 
 
-document.getElementById('submit').addEventListener("submit", function(e) {
+document.getElementById('make_form').addEventListener("submit", function(e) {
     e.preventDefault(); // before the code
     uploadData(e);
   })
