@@ -2,13 +2,18 @@ let url = "http://127.0.0.1:5000"
 
 // Code
 
-fetch(url + "/activeDays")
+fetch(url + "/activeDay")
   .then(response => response.json())
   .then(data => {
-    let activeDays = data.activeDays;
-    activeDays.forEach(day => {
-      document.getElementById(`day_${day}`).classList.remove("disabled");
-      document.getElementById(`day_${day}`).classList.remove("text-secondary");
-      document.getElementById(`day_${day}`).classList.add("text-light");
-    });
+    let activeDay = data["activeDay"];
+    console.log(activeDay)
+
+    let dayTab = document.getElementById(`day_link`);
+    if (activeDay > 1){
+      dayTab.classList.remove('disabled')
+      dayTab.classList.remove('secondary')
+      dayTab.classList.add('text-light')
+      dayTab.innerHTML = "Day " + activeDay
+    }
+
   });
