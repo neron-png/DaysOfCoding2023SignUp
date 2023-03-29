@@ -1,4 +1,4 @@
 def greeting_problem(arguments):
-    print(f"Hello {arguments[0]}")
+    return f"Hello {arguments[0]}"
 
 
