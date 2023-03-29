@@ -10,7 +10,7 @@ import requests
 #   CONFIG   #
 ##############
 
-ACTIVE_DAYS = [1, 2, 3, 4, 5]
+ACTIVE_DAY = 5
 
 app = Flask(__name__)
 CORS(app)
