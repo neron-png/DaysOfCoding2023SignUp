@@ -60,6 +60,7 @@ def problem_checking():
 
     if ACTIVE_DAY == 1:
         result = problems.day1.greeting_problem(test_case)
+        print(result)
 
     resp = Response(response=json.dumps({"result": result}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',

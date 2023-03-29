@@ -10,7 +10,7 @@
 h1 {
     color: var(--primary);
     font-weight: bolder;
-    font-size: 5rem;
+    font-size: 3rem;
 }
 
 .bottomright {
@@ -28,7 +28,7 @@ h1 {
     background-color: var(--primary);
     color:#d9dde0;
     border: 0;
-    width: 40%;
+    width: 50%;
 }
 
 .bg-primary {
@@ -71,3 +71,18 @@ body {
 .modal {
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+#test_case{
+    height: 15vh;
+}
+
+.expected-output{
+    margin-top: 2cm;
+    background-color: #2d2a2a;
+    height: 5vh;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+
+
