@@ -6,12 +6,13 @@ import random
 import re
 import requests
 import problems.day1
+import problems.day2
 
 ##############
 #   CONFIG   #
 ##############
 
-ACTIVE_DAY = 1
+ACTIVE_DAY = 2
 
 app = Flask(__name__)
 CORS(app)
@@ -57,9 +58,16 @@ def problem_checking():
     data = request.get_json()
     test_case = data["test_case"]
     result = ""
+    
+    problem_activations = {
+        1: problems.day1.greeting_problem,
+        2: problems.day2.run
+    }
 
-    if ACTIVE_DAY == 1:
-        result = problems.day1.greeting_problem(test_case)
+    # if ACTIVE_DAY == 1:
+    #     result = problems.day1.greeting_problem(test_case)
+
+    result = problem_activations[ACTIVE_DAY](test_case)
 
     resp = Response(response=json.dumps({"result": result}), status=200, mimetype='application/json',
                     headers={'Access-Control-Allow-Origin': '*',
