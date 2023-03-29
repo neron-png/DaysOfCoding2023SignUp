@@ -50,14 +50,14 @@ def sendWebhook(webhook_text):
     response = requests.post(webhook_url, data=json.dumps(message), headers={'Content-Type': 'application/json'})
 
 
-@app.route("/activeDays", methods=["GET"])
-def activeDays():
+@app.route("/activeDay", methods=["GET"])
+def activeDay():
 
-    activeDays = {
-        "activeDays" : [x for x in ACTIVE_DAYS]
+    activeDay = {
+        "activeDay" : ACTIVE_DAY
     }
 
-    resp =  Response(response=json.dumps(activeDays), status=200, mimetype='application/json', headers={'Access-Control-Allow-Origin':'*',
+    resp =  Response(response=json.dumps(activeDay), status=200, mimetype='application/json', headers={'Access-Control-Allow-Origin':'*',
                     'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'})
     # resp.headers["Access-Control-Allow-Origin", "*"]
     return resp
