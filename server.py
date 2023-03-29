@@ -6,6 +6,8 @@ import random
 import re
 import requests
 
+import problems.day1
+from problems import day1
 ##############
 #   CONFIG   #
 ##############
@@ -48,6 +50,10 @@ def sendWebhook(webhook_text):
     webhook_url = "https://discord.com/api/webhooks/964272870035423303/EXHDCtPXDsTJIxLooyqLGkfgA39aztCxihXs_Z9vcI2hxr1m2D9RPyaArRgm5kDKBjTm"
     message = {"content": webhook_text}
     response = requests.post(webhook_url, data=json.dumps(message), headers={'Content-Type': 'application/json'})
+
+def problem_checking():
+    if activeDay == 1:
+        problems.day1.greeting_problem("Mike")
 
 
 @app.route("/activeDay", methods=["GET"])

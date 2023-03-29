@@ -11,14 +11,24 @@
             <a class="navbar-brand" href="https://auth.acm.org/" target="_blank">
                 <img src="content/acmlogo.webp" alt="ACM Logo">
             </a>
-
         </div>
     </nav>
     <div class="container">
         <div class="mt-3" style="width:60%">
             <form id="make_form">
-
+                <div class="form-group row my-4">
+                  <label for="discord" class="col-4 col-form-label fw-bold">Your input</label>
+                  <div class="col-8">
+                    <input id="discord" name="discord" placeholder="Alan" type="text" class="form-control" required="required">
+                  </div>
+                </div>
+                <div class="form-group row my-4">
+                  <div class="offset-4 col-8">
+                    <button name="submit" id="submit" type="submit" class="btn btn-primary">Click for the output</button>
+                  </div>
+                </div>
               </form>
+        </div>
         </div>
     </div>
 
