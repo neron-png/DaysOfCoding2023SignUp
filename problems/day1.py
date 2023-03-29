@@ -1,4 +1,4 @@
-def greeting_problem(arguments):
-    return f"Hello {arguments[0]}"
+def greeting_problem(argument):
+    return f"Hello {argument}"
 
 
