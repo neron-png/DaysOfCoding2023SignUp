@@ -72,17 +72,25 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-#test_case{
+#test_case {
     height: 15vh;
+    margin-bottom: 1rem;
 }
 
 .expected-output{
     margin-top: 2cm;
     background-color: #2d2a2a;
-    height: 5vh;
+    height: 9vh;
     border-radius: 1rem;
     padding-left: 1rem;
     padding-top: 0.5rem;
+    padding-bottom: 1rem;
 }
 
+#a-label{
+    color: #9933ff;
+}
 
+#the-label{
+    color: white;
+}

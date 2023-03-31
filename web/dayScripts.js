@@ -1,12 +1,10 @@
 let url = "http://127.0.0.1:5000"
 
-
 async function uploadData(e){
     var form = document.getElementById('make_form');
     var formdata = new FormData(e.target);
 
-	var modal = document.getElementById("myModal");
-
+	var input = document.getElementById('input');
     var test_case = formdata.get('test_case');
 
     await fetch(url + "/problem_checking", {
@@ -22,7 +20,15 @@ async function uploadData(e){
         // document.getElementById('info').innerHTML = "Your request for finding a team has been successfully submitted. Thank you and good luck!";
 
         // // alert('You have successfully created and joined your team!\nCopy this code and share it with your teammates to have them join');
-		//     modal.style.display = "block";
+            document.getElementById("the-label").innerHTML = data["result"]
+            if (data["result"].includes("Wrong Input!")){
+                document.getElementById("the-label").style.color = "red"
+            }
+            else{
+                document.getElementById("the-label").style.color = "white"
+            }
+
+            input.style.display = "block";
         });
 
       } else if ( response.status === 418 ){
