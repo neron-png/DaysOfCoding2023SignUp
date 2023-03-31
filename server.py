@@ -5,7 +5,7 @@ import sqlite3
 import random
 import re
 import requests
-from problems import day1,day2,day3,day4,day5,day6,day7
+from problems import day0,day1,day2,day3,day4,day5,day6,day7
 
 ##############
 #   CONFIG   #
@@ -79,11 +79,21 @@ def leaderboard():
 @app.route("/problem_checking", methods=["POST"])
 def problem_checking():
 
+    global ACTIVE_DAY
+    
+    try:
+        with open("activeDay", 'r+') as f:
+            ACTIVE_DAY = int(f.readline())
+    except Exception as e:
+        print(e)
+        pass
+    
     data = request.get_json()
     test_case = data["test_case"]
     result = ""
 
     problem_activations = {
+        0: day0.run,
         1: day1.greeting_problem,
         2: day2,
         3: day3,
@@ -92,6 +102,8 @@ def problem_checking():
         6: day6,
         7: day7.run
     }
+    if ACTIVE_DAY == 0:
+        result = problem_activations[0](test_case=test_case)
 
     if ACTIVE_DAY == 2:
         result = day2.Basketball().run(test_case=test_case)
@@ -100,7 +112,8 @@ def problem_checking():
         result = day7.run(test_case)
 
     # result = problem_activations[ACTIVE_DAY](test_case)
-
+    print(ACTIVE_DAY)
+    print(result)
 
 
     resp = Response(response=json.dumps({"result": result}), status=200, mimetype='application/json',
