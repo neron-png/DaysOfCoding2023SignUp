@@ -52,6 +52,31 @@ def sendWebhook(webhook_text):
     response = requests.post(webhook_url, data=json.dumps(message), headers={'Content-Type': 'application/json'})
 
 
+@app.route("/leaderboard", methods=["GET"])
+def leaderboard():
+    
+    lb = {"leaderboard": [{"team": "Test team 1",
+                        "id": "team_code",
+                        "score": "666",
+                        "members": "Neron"},
+     {"team": "team_name",
+                        "id": "team_code",
+                        "score": "score",
+                        "members": "member"}],
+     "updated": "2022-03-31 21:02"
+     }
+    
+    with open("leaderboard.json", "r") as f:
+        lb = json.load(f)
+    
+    
+    resp = Response(response=json.dumps(lb), status=200, mimetype='application/json',
+                    headers={'Access-Control-Allow-Origin': '*',
+                             'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'})
+    # resp.headers["Access-Control-Allow-Origin", "*"]
+    return resp
+
+
 @app.route("/problem_checking", methods=["POST"])
 def problem_checking():
     print("I am here")
