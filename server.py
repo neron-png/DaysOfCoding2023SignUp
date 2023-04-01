@@ -102,6 +102,7 @@ def problem_checking():
         6: day6,
         7: day7.run
     }
+
     if ACTIVE_DAY == 0:
         result = problem_activations[0](test_case=test_case)
     
@@ -110,6 +111,9 @@ def problem_checking():
     
     if ACTIVE_DAY == 2:
         result = day2.Basketball().run(test_case=test_case)
+
+    if ACTIVE_DAY == 3:
+        result = day3.run(test_case)
 
     if ACTIVE_DAY == 7:
         result = day7.run(test_case)

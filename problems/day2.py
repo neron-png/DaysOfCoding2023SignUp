@@ -23,40 +23,37 @@ class Basketball:
     def run(self, test_case):
         # n = int(input("Enter the number of teams: "))
         data = []
-
         try:
             data = test_case.split(" ")
             n = int(data[0])
-            print(data[0])
+            # print(data[0])
 
             if n < 2:
-                return "Wrong Input! Please notice that the number of teams must be greater than 2"
+                return "Wrong Input! Please notice that the number of teams must be greater than 2. Here is an acceptable test case: 4 1 0 0 1 1 0 0 1 "
 
-            # if data[0] != len(data) - 1:
-            #     return "Wrong Input! Too few/many arguments"
+            if 2 * n != len(data) - 1:
+                return "Wrong Input! Too few/many arguments. Make sure the number of teams matches the number of wins and losses. Here is an acceptable test case: 4 1 0 0 1 1 0 0 1"
 
             for i in range(0, len(data) - 1):
                 data[i] = data[i+1]
 
         except Exception:
-            return "Wrong Input! It must contain only numeric data"
+            return "Wrong Input! It must contain only numeric and positive data in ONE line.Here is an acceptable test case: 4 1 0 0 1 1 0 0 1"
 
         teams = []
 
-        print(data)
+        # print(data)
         index = 0
         for i in range(0, n):
             try:
-                print(data[index], data[index+1])
+                # print(data[index], data[index+1])
                 W, L = map(int, f"{data[index]} {data[index + 1]}".split(" "))
                 teams.append(W - L)
                 index += 2
                 if W < 0 or L < 0:
-                    return "Wrong Input! W and L must be positive numbers"
-                # if W < L:
-                #     return "Wrong input! W must be greater than L"
+                    return "Wrong Input! It must contain only numeric and positive data in ONE line.Here is an acceptable test case: 4 1 0 0 1 1 0 0 1"
             except Exception:
-                return "Wrong Input! Please notice that your input must be numeric"
+                return "Wrong Input! It must contain only numeric and positive data in ONE line.Here is an acceptable test case: 4 1 0 0 1 1 0 0 1"
 
         if self.can_split_teams(teams, [], [], 0):
             return "Yes"
