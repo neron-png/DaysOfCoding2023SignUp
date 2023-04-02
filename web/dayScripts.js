@@ -20,7 +20,7 @@ async function uploadData(e){
         // document.getElementById('info').innerHTML = "Your request for finding a team has been successfully submitted. Thank you and good luck!";
 
         // // alert('You have successfully created and joined your team!\nCopy this code and share it with your teammates to have them join');
-            document.getElementById("the-label").innerHTML = data["result"]
+            document.getElementById("the-label").innerHTML = data["result"].replaceAll('\\n', '<br />');
             if (data["result"].includes("Wrong Input!")){
                 document.getElementById("the-label").style.color = "red"
             }
